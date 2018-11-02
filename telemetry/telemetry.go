@@ -26,6 +26,12 @@ type TELEM_OUT struct {
 	GpsFix      uint32  `json:"gps_fix,omitempty"`
 	Temp        float32 `json:"temp,omitempty"`
 	Track       float64 `json:"track,omitempty"`
+	AcclX	    float64 `json:"AcclX,omitempty"`
+	AcclY	    float64 `json:"AcclY,omitempty"`
+	AcclZ	    float64 `json:"AcclZ,omitempty"`
+	X	    float64 `json:"X,omitempty"`
+	Y	    float64 `json:"Y,omitempty"`
+	Z	    float64 `json:"Z,omitempty"`
 }
 
 var pp *geo.Point = geo.NewPoint(10, 10)
@@ -65,7 +71,7 @@ func (t *TELEM) ShitJson() []TELEM_OUT {
 	var out []TELEM_OUT
 
 	for i, _ := range t.Gps {
-		jobj := TELEM_OUT{&t.Gps[i], 0, 0, 0, 0}
+		jobj := TELEM_OUT{&t.Gps[i], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 		if 0 == i {
 			jobj.GpsAccuracy = t.GpsAccuracy.Accuracy
 			jobj.GpsFix = t.GpsFix.F
@@ -87,6 +93,12 @@ func (t *TELEM) ShitJson() []TELEM_OUT {
 		} else {
 			jobj.Track = last_good_track
 		}
+		jobj.X = t.Gyro[i].X
+		jobj.Y = t.Gyro[i].Y
+		jobj.Z = t.Gyro[i].Z
+		jobj.AcclX = t.Accl[i].X
+		jobj.AcclY = t.Accl[i].Y
+		jobj.AcclZ = t.Accl[i].Z
 
 		out = append(out, jobj)
 	}
