@@ -1,3 +1,8 @@
+GoPro Metadata Format Parser (with enhanced `json` output)
+============================
+Mostly the same functionality as Juanlrache's project (https://github.com/JuanIrache/gopro-utils). Updated the `gopro2json.go` code to output the gyroscope (X,Y,Z) and accelerometer (X,Y,Z) readings as well.
+
+
 GoPro Metadata Format Parser + GPMD2CSV
 ============================
 
